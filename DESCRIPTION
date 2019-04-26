@@ -7,5 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "avkoehl@ucdavis.edu")
 Description: Given the output of a topic model, create several pages to visualize the results. Builds upon ldavis packge.
+License: GPL (>= 2)
+Imports: jsonlite
 Encoding: UTF-8
 LazyData: true

@@ -1,0 +1,106 @@
+/* colors from clrs.cc */
+body {
+  margin: 0px;
+  border: 0px;
+  font-family: Sans-serif;
+}
+
+hr {
+  align-self: stretch;
+  width: 700px;
+  color: #3f4144;
+}
+
+.container {
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  color: #333;
+  font-family: "Helvetica Neue", Sans-serif;
+  line-height: 1.6;
+}
+
+.ldaviscontainer {
+  width: 70vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  color: #333;
+}
+
+/* ========================================
+NAV
+======================================== */
+.nav {
+  width: 100vw;
+  background-color: #EEEEEE;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav > a {
+  color: #555555;
+  text-decoration: none;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.nav > a:hover {
+  color: #222222;
+  border-bottom: 2px solid #222222;
+}
+
+.nav > a.active {
+  color: #222222;
+  border-bottom: 2px solid #222222;
+}
+
+
+/* ========================================
+SEARCH
+======================================== */
+.search {
+  flex-direction: row;
+  margin: 20px auto;
+}
+
+input {
+  height: 30px;
+  border-radius: 4px;
+  padding-left: 5px;
+  border: 1px solid #d2d6dd;
+}
+
+button {
+  padding: 10px 20px;
+  color: #3f4144;
+  background:  #d2d6dd;
+  border-radius: 4px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ========================================
+TOPIC TERMS
+======================================== */
+#topicterms {
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.topictermsbox {
+  width: 150px;
+  margin: 10px; 
+  padding: 10px;
+  border: 2px solid #555;
+}
