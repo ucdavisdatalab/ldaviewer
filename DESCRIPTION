@@ -1,0 +1,11 @@
+Package: ldaviewerDSI
+Title: Creates a website to explore lda outputs
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Arthur",
+           family = "Koehl",
+           role = c("aut", "cre"),
+           email = "avkoehl@ucdavis.edu")
+Description: Given the output of a topic model, create several pages to visualize the results. Builds upon ldavis packge.
+Encoding: UTF-8
+LazyData: true
