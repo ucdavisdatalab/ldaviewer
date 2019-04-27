@@ -1,10 +1,24 @@
-# top 'count' 15 docs per topic
-#var topicterms = [
-#       {'name':1, 'scores':[00.3,...], 'docs':['f3',]},
-#       {...}
-#   ];
-
-create_td = function(x, fnames, count=3)
+#' Create Small Topic Docs JSON
+#' 
+#' A function to create a string containing the topic docs array.
+#' Takes as input the doc topics array and the names of the files.
+#' If doc topics is incredibly large, then just pass a sample
+#' to this punction and the filenames for that sample.
+#' Output string has this format: var topicdocs = [
+#' {'name':1, 'scores':[0.04,...], 'docs':['filename1','filename2'...]},
+#' {...}
+#' ]
+#' @param x A doc topic matrix.
+#' @param fnames A character vector of filenames with length = nrows(x)
+#' @param count **optional** Number of documents per topic to store, default=15)
+#' @return A string containing the JSON.
+#' 
+#' @examples
+#' \dontrun{
+#' td_small = create_td(dt, fnames)
+#' td_small = create_td(dt, fnames, 20)
+#' }
+create_td = function(x, fnames, count=15)
 {
     result = "var topicdocs = ["
     x = t(x)

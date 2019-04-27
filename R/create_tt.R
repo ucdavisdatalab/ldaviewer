@@ -1,8 +1,22 @@
-# expects as input a topic terms matrix
-# for each topic get the top 200 words
-# create js object of format:
-# var topicterms = [{'name': 1, 'scores': [0.03,...], 'terms': ['particle', 'atmostphere',...}, {...}];
-create_tt = function(x, vocab, count=3)
+#' Create Small Topic Terms JSON
+#' 
+#' A function to create a string containing the topic terms array.
+#' Takes as input the topic terms array and the vocab.
+#' Output string has this format: var topicterms = [
+#' {'name':1, 'scores':[0.04,...], 'terms':['word1", "word2",...]},
+#' {...}
+#' ]
+#' @param x A topic term matrix.
+#' @param fnames A character vector of vocab with length = ncols(x)
+#' @param count **optional** Number of terms per topic to store, default=200)
+#' @return A string containing the JSON.
+#' 
+#' @examples
+#' \dontrun{
+#' dt_small = create_dt(dt, vocab)
+#' dt_small = create_dt(dt, vocab, 100)
+#' }
+create_tt = function(x, vocab, count=200)
 {
     result = "var topicterms = ["
     indsorted = t(apply(x, 1, order, decreasing=TRUE))
