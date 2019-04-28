@@ -66,7 +66,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     if (ldavispath == "")
     {
 	    # copy static files over
-        srcdir = system.file("htmlcssjs/noldavis/", package="ldaviewerDSI")
+        srcdir = system.file("htmljscss/noldavis/", package="ldaviewerDSI")
         file.copy(srcdir, odir, recursive=TRUE)
 
     } 
@@ -74,7 +74,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     else 
     {
 	    # copy static files over with the ldavis
-        srcdir = system.file("htmlcssjs/withldavis/", package="ldaviewerDSI")
+        srcdir = system.file("htmljscss/withldavis/", package="ldaviewerDSI")
         file.copy(srcdir, odir, recursive=TRUE)
     }
     return (odir)
