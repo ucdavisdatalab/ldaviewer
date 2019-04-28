@@ -17,6 +17,7 @@
 #' @param odir A string containing the path to create the website in.
 #' @param ldavispath **optional A string containing the path to the lda.json file.
 #'	  if not empty then ldavis will be included in the site.
+#' @param verbose **optional** A bool, displays some extra prints if set to TRUE, default=FALSE.
 #' @return A string that is the path to the directory containing the site
 #'
 #' @examples
@@ -24,11 +25,15 @@
 #' create_viewer(dt,tt,vocab,fnames, "./texts", "./site/", "./jda.json"
 #' create_viewer(dt,tt,vocab,fnames, "./texts", "./site/")
 #'}
-create_viewer(dt,tt,vocab,fnames,textpath, odir, ldavispath="")
+#' @export
+create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbose=FALSE)
 {
     # get data
+    if (verbose) {print("creating dt_small")}
     dt_small = create_dt(dt, fnames)
-    td_small = create_td(td, fnames)
+    if (verbose) {print("creating td_small")}
+    td_small = create_td(dt, fnames)
+    if (verbose) {print("creating tt_small")}
     tt_small = create_tt(tt, vocab)
 
     # make output directory
@@ -36,29 +41,41 @@ create_viewer(dt,tt,vocab,fnames,textpath, odir, ldavispath="")
     {
 	unlink(odir, recursive=TRUE)
     }
-    create.dir(odir)
+    dir.create(odir)
 
+    datadir = paste0(odir, "/data/")
+    dir.create(datadir)
+
+    if (verbose) {print("writing to odir")}
     # write to output directory
-    con = file(file.path(odir, "dt_small.js"))
+    con = file(file.path(datadir, "dt_small.js"))
     cat(dt_small, file=con)
     close.connection(con)
-    con = file(file.path(odir, "td_small.js"))
+    con = file(file.path(datadir, "td_small.js"))
     cat(td_small, file=con)
     close.connection(con)
-    con = file(file.path(odir, "tt_small.js"))
+    con = file(file.path(datadir, "tt_small.js"))
     cat(tt_small, file=con)
     close.connection(con)
 
-    srcdir = system.file("htmlcssjs", package="ldaviewerDSI")
+
+    # copy texts over
+    if (verbose) {print("copying files over")}
+    file.copy(textpath, datadir, recursive=TRUE)
 
     if (ldavispath == "")
     {
-	# copy files over
+	    # copy static files over
+        srcdir = system.file("htmlcssjs/noldavis/", package="ldaviewerDSI")
+        file.copy(srcdir, odir, recursive=TRUE)
+
     } 
 
     else 
     {
-	# copy files over with the ldavis
+	    # copy static files over with the ldavis
+        srcdir = system.file("htmlcssjs/withldavis/", package="ldaviewerDSI")
+        file.copy(srcdir, odir, recursive=TRUE)
     }
     return (odir)
 }

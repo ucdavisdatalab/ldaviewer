@@ -18,6 +18,7 @@
 #' dt_small = create_dt(dt, fnames)
 #' dt_small = create_dt(dt, fnames, 20)
 #' }
+#' @export
 create_dt = function(x, fnames, count=15)
 {
     result = "var doctopics = ["
@@ -30,8 +31,8 @@ create_dt = function(x, fnames, count=15)
         topics = inds[1:count]
         
         name = paste0("'name':", fnames[i])
-        rscores = paste0("'scores':",toJSON(scores))
-        rtopics = paste0("'topics':", toJSON(topics))
+        rscores = paste0("'scores':",jsonlite::toJSON(scores))
+        rtopics = paste0("'topics':", jsonlite::toJSON(topics))
         res = paste0('{', name, ',', rscores, ',', rtopics,'}')
         if (i < nrow(indsorted))
         {

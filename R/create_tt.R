@@ -16,6 +16,7 @@
 #' dt_small = create_dt(dt, vocab)
 #' dt_small = create_dt(dt, vocab, 100)
 #' }
+#' @export
 create_tt = function(x, vocab, count=200)
 {
     result = "var topicterms = ["
@@ -28,8 +29,8 @@ create_tt = function(x, vocab, count=200)
         terms = (vocab[inds][1:count])
         
         name = paste0("'name':", i)
-        rscores = paste0("'scores':",toJSON(scores))
-        rterms = paste0("'terms':", toJSON(terms))
+        rscores = paste0("'scores':",jsonlite::toJSON(scores))
+        rterms = paste0("'terms':", jsonlite::toJSON(terms))
         res = paste0('{', name, ',', rscores, ',', rterms,'}')
         if (i < nrow(indsorted))
         {

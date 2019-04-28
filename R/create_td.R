@@ -18,6 +18,7 @@
 #' td_small = create_td(dt, fnames)
 #' td_small = create_td(dt, fnames, 20)
 #' }
+#' @export
 create_td = function(x, fnames, count=15)
 {
     result = "var topicdocs = ["
@@ -30,8 +31,8 @@ create_td = function(x, fnames, count=15)
         docs = fnames[inds[1:count]]
         
         name = paste0("'name':", i)
-        rscores = paste0("'scores':",toJSON(scores))
-        rdocs = paste0("'docs':", toJSON(docs))
+        rscores = paste0("'scores':",jsonlite::toJSON(scores))
+        rdocs = paste0("'docs':", jsonlite::toJSON(docs))
         res = paste0('{', name, ',', rscores, ',', rdocs,'}')
         if (i < nrow(indsorted))
         {
