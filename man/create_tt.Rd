@@ -26,7 +26,7 @@ Output string has this format: var topicterms = [
 }
 \examples{
 \dontrun{
-dt_small = create_dt(dt, vocab)
-dt_small = create_dt(dt, vocab, 100)
+tt_small = create_tt(tt, vocab)
+tt_small = create_tt(tt, vocab, 100)
 }
 }

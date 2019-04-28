@@ -36,8 +36,9 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     if (verbose) {print("creating tt_small")}
     tt_small = create_tt(tt, vocab)
 
-    # create filenames file
-    id2fname = create_id2fname(fnames)
+    # create filenames json
+    fnames = jsonlite::toJSON(fnames)
+    fnames = paste0("var fnames:", fnames, ";")
 
     # make output directory
     if (dir.exists(odir))
@@ -61,8 +62,8 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     con = file(file.path(datadir, "tt_small.js"))
     cat(tt_small, file=con)
     close.connection(con)
-    con = file(file.path(datadir, "i2dfname.js"))
-    cat(id2fname, file=con)
+    con = file(file.path(datadir, "fnames.js"))
+    cat(fnames, file=con)
     close.connection(con)
 
 
