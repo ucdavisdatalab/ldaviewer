@@ -22,9 +22,11 @@
 create_dt = function(x, fnames, count=15)
 {
     result = "var doctopics = ["
-    indsorted = t(apply(x, 1, order, decreasing=TRUE))
+
+    dt.list = lapply(seq_len(nrow(x)), function(i) x[i,])
+    indsorted = lapply(dt.list, order, decreasing=TRUE)
     
-    for (i in 1:nrow(indsorted))
+    for (i in 1:length(indsorted))
     {
         inds = indsorted[i,]
         scores = (x[i,][inds][1:count])
