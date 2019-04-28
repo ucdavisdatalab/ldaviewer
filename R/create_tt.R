@@ -38,7 +38,7 @@ create_tt = function(x, vocab, count=200)
         }
         result = paste0(result,res)
     }
-    result = paste0(result,"]:")
+    result = paste0(result,"];")
     return (result)
 }
 
