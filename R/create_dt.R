@@ -30,7 +30,8 @@ create_dt = function(x, fnames, count=15)
         scores = (x[i,][inds][1:count])
         topics = inds[1:count]
         
-        name = paste0("'name':", fnames[i])
+        n = paste0('"',fnames[1],'"')
+        name = paste0("'name':", n)
         rscores = paste0("'scores':",jsonlite::toJSON(scores))
         rtopics = paste0("'topics':", jsonlite::toJSON(topics))
         res = paste0('{', name, ',', rscores, ',', rtopics,'}')
