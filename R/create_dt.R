@@ -28,7 +28,7 @@ create_dt = function(x, fnames, count=15)
     
     for (i in 1:length(indsorted))
     {
-        inds = indsorted[i,]
+        inds = unlist(indsorted[i], use.names=FALSE)
         scores = (x[i,][inds][1:count])
         topics = inds[1:count]
         
@@ -37,7 +37,7 @@ create_dt = function(x, fnames, count=15)
         rscores = paste0("'scores':",jsonlite::toJSON(scores))
         rtopics = paste0("'topics':", jsonlite::toJSON(topics))
         res = paste0('{', name, ',', rscores, ',', rtopics,'}')
-        if (i < nrow(indsorted))
+        if (i < length(indsorted))
         {
             res = paste0(res,",\n")
         }
