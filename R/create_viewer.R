@@ -36,6 +36,9 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     if (verbose) {print("creating tt_small")}
     tt_small = create_tt(tt, vocab)
 
+    # create filenames file
+    id2fname = create_id2fname(fnames)
+
     # make output directory
     if (dir.exists(odir))
     {
@@ -45,6 +48,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
 
     datadir = paste0(odir, "/data/")
     dir.create(datadir)
+
 
     if (verbose) {print("writing to odir")}
     # write to output directory
@@ -57,6 +61,9 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     con = file(file.path(datadir, "tt_small.js"))
     cat(tt_small, file=con)
     close.connection(con)
+    con = file(file.path(datadir, "i2dfname.js"))
+    cat(id2fname, file=con)
+    close.connection(con)
 
 
     # copy texts over
@@ -67,7 +74,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     {
 	    # copy static files over
         srcdir = system.file("htmljscss/noldavis/", package="ldaviewerDSI")
-        file.copy(srcdir, odir, recursive=TRUE)
+        file.copy(list.files(srcdir, recursive=TRUE), odir, recursive=TRUE)
 
     } 
 
@@ -75,7 +82,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     {
 	    # copy static files over with the ldavis
         srcdir = system.file("htmljscss/withldavis/", package="ldaviewerDSI")
-        file.copy(srcdir, odir, recursive=TRUE)
+        file.copy(list.files(srcdir, recursive=TRUE), odir, recursive=TRUE)
     }
     return (odir)
 }
