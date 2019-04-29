@@ -2,33 +2,31 @@
 % Please edit documentation in R/create_dt.R
 \name{create_dt}
 \alias{create_dt}
-\title{Create Small Doc Topics JSON}
+\title{Create Doc Topics JSON}
 \usage{
-create_dt(x, fnames, count = 15)
+create_dt(x, count = 15)
 }
 \arguments{
 \item{x}{A doc topic matrix.}
 
-\item{fnames}{A character vector of filenames with length = nrows(x)}
-
 \item{count}{**optional** Number of topics per document to store, default=15)}
+
+\item{fnames}{A character vector of filenames with length = nrows(x)}
 }
 \value{
 A string containing the JSON.
 }
 \description{
-A function to create a string containing the doc topics array.
-Takes as input the doc topics array and the names of the files.
-If doc topics is incredibly large, then just pass a sample
-to this punction and the filenames for that sample.
-Output string has this format: var doctopics = [
-{'name':'filename1', 'scores':[0.04,...], 'topics':[2,3,41,2...]},
-{...}
-]
+A function to create a string containing two arrays. First array
+has the top topics per doc. Second has the scores for those topics.
+If doc topics is incredibly large, then just pass a sample.
+Output string has this format: 
+var inds = [11,23...];
+var scores = [0.04,0.02,...];
 }
 \examples{
 \dontrun{
-dt_small = create_dt(dt, fnames)
+dt_small = create_dt(dt) 
 dt_small = create_dt(dt, fnames, 20)
 }
 }
