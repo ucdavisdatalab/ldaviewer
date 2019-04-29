@@ -3,43 +3,48 @@
 
   <head>
     <title>Doc Topics</title>
-    <script src="./js/d3.v3.js"></script>
+    <script charset="utf-8" src="d3.v3.js"></script>
     <script src="./data/dt_small.js"></script>
     <script src="./data/tt_small.js"></script>
-    <script src="./data/uid2title.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/mystyle.css">
+    <script src="./data/fnames.js"></script>
+    <link rel="stylesheet" type="text/css" href="./mystyle.css">
     <style>
-body {
-  font-family: "Arial", sans-serif;
-}
-
+	.topic1 {
+	  color: blue;
+	}
+	.topic2 {
+	  color: red;
+	}
+	.topic3 {
+	  color: orange;
+	}
+	.topic4 {
+	  color: green;
+	}
+	.topic5 {
+	  color: purple;
 	.bar {
 	  fill: #1f77b4;
 	}
-
 	.axis {
 	  font-size: 13px;
 	}
-
 	.axis path,
 	.axis line {
 	  fill: none;
 	  display: none;
 	}
-
 	.label {
 	  font-size: 13px;
 	}
     </style>
-
   </head>
 
-  <body onload="create_charts()">
+  <body onload="load()">
 
     <div class="nav">
       <a href="index.html">home</a>
       <a href="doctopics.html" class="active"> doctopics</a> 
-      <a href="cssdoctopics.html"> cssdoctopics</a> 
       <a href="topicdocs.html">topicdocs</a>
     </div>
 
@@ -47,36 +52,55 @@ body {
     <center>
       <div class="search">
 	  <input type="text" id="document" value="1">
-	<button onclick="create_charts()">
+	<button onclick="load()">
 	  search 
 	</button>
       </div> 
     </center> 
 
+    <!-- DOC TOPIC BAR CHARTS -->
     <div style="display: none" id="tid">1</div>
-    <div style="display: flex; flex-direction:row">
+    <div style="display: flex; flex-direction:row; align-items: center; justify-content:center">
 
       <div id="left;" style="border-right: 2px solid #eee">
-	<center>
-	  <h3> Document Topic Probabilities </h3>
-	  <h3 id="docid_title"> Document id: 1 </h3> 
-	</center>
-	<div id="doctopics"></div>
+	       <center>
+	          <h3> Document Topic Probabilities </h3>
+	      </center>
+	      <div id="doctopics"></div>
       </div>
 
-      <div id="middle;" style="border-right: 2px solid #eee">
-	<center>
-	  <h3> Topic Terms Probabilities </h3>
-	  <h3 id="topic_id"> Topic id: 35 </h3> 
-	</center>
-	<div id="topicterms"></div>
+      <div id="middle;">
+	      <center>
+    	      <h3 id="topic_id"> Topic id: 75 </h3> 
+    	</center>
+	    <div id="topicterms"></div>
       </div>
-
-      <div id="lda" style="border-right: 2px solid #eee" ></div>
-
     </div>
+      <!-- DOC TOPIC BAR CHARTS -->
 
-    <script src="./js/doctopics.js"></script>
+    <hr>
+
+    <!-- TOPIC TERMS -->
+    <div id="csstopicterms">
+      <div id="termstopic1" style="background: LightBlue" class="topictermsbox"> </div>
+      <div id="termstopic2" style="background: pink" class="topictermsbox"> </div>
+      <div id="termstopic3" style="background: LightSalmon" class="topictermsbox"> </div>
+      <div id="termstopic4" style="background: LightGreen" class="topictermsbox"> </div>
+      <div id="termstopic5" style="background: Thistle" class="topictermsbox"> </div>
+    </div>
+    <!-- /TOPIC TERMS -->
+
+    <!-- DOC CONTAINER -->
+    <div class="container">
+      <hr>
+      <div id="cssdoctopics"></div>
+    </div>
+    <!-- /DOC CONTAINER -->
+
+
+
+
+    <script src="./doctopics.js"></script>
   </body>
 
 </html>

@@ -15,7 +15,7 @@ function load_docs() {
 
 
   //---------------------LOAD TOPIC TERMS --------------------------//
-  console.log("loading in topic terms");
+  //console.log("loading in topic terms");
   topicdata = topicterms[index]; //from tt_small.js
   var nterms = 50;
   t1 = []; //global var
@@ -33,6 +33,7 @@ function load_docs() {
 
   for (var i = 0; i < docs.length; i++)
   {
+    fname = get_title(docs[i])
     var div = document.createElement("div");
     div.id = docs[i];
     div.style.margin = "10px auto";
@@ -41,25 +42,26 @@ function load_docs() {
     textp = document.createElement("p");
     textp.id= docs[i] + "_text";
     var title = document.createElement("h3");
-    title.innerHTML = get_title(docs[i]);
+    title.innerHTML = fname
     div.appendChild(title);
     div.appendChild(textp);
 
-    fname = docs[i] + ".txt";
     ajax_request_load_file(fname, textp);
   }
 
 }
 
-function get_title(uid) {
-  //from uid get the tile
-  var title = "";
-  for (var i in filenames) {
-    if (filenames[i] == uid) {
-      var title = i;
-    }
+function get_title(doc_id) {
+  if (isNaN(doc_id)) {
+      doc_title = doc_id;
+  } else {
+      doc_title = fnames[doc_id - 1];
   }
-  return title;
+
+  if (doc_title == undefined) {
+    alert("doc: " + doc_title + "not found");
+  }
+  return doc_title;
 }
 
 
@@ -84,11 +86,11 @@ function ajax_request_load_file(fname, textp) {
 }
 
 function callback (response, textp) {
-  console.log("parsing doc");
+  //console.log("parsing doc");
   var full = response;
   var words = full.split(" ");
 
-  for (var i = 0; i < words.length; i++) {
+  for (var i = 0; i < 350; i++) {
     var wd = document.createElement("span");
     wd.innerHTML = words[i] + " ";
     if (t1.includes(words[i].toLowerCase())) {
@@ -96,5 +98,10 @@ function callback (response, textp) {
     }
     textp.appendChild(wd);
   }
+    end = document.createElement("p")
+    end.innerHTML = " ... ";
+    end.style.textAlign="center";
+    end.style.fontSize="xx-large";
+    textp.appendChild(end);
 }
    
