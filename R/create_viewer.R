@@ -30,7 +30,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
 {
     # get data
     if (verbose) {print("creating dt_small")}
-    dt_small = create_dt(dt, fnames)
+    dt_small = create_dt(dt)
     if (verbose) {print("creating td_small")}
     td_small = create_td(dt, fnames)
     if (verbose) {print("creating tt_small")}
@@ -38,7 +38,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
 
     # create filenames json
     fnames = jsonlite::toJSON(fnames)
-    fnames = paste0("var fnames:", fnames, ";")
+    fnames = paste0("var fnames=", fnames, ";")
 
     # make output directory
     if (dir.exists(odir))
@@ -70,6 +70,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     # copy texts over
     if (verbose) {print("copying files over")}
     file.copy(textpath, datadir, recursive=TRUE)
+    file.rename(paste(datadir,textpath,sep="/"), paste0(datadir,"/text/")
 
     if (ldavispath == "")
     {

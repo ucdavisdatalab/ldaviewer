@@ -21,6 +21,8 @@
 #' @export
 create_td = function(x, fnames, count=15)
 {
+    # pretty inefficient but fast enough since nrows is always small
+    # conveniant output format in this sparse format so keeping it like this
     result = "var topicdocs = ["
     x = t(x)
     indsorted = t(apply(x, 1, order, decreasing=TRUE))

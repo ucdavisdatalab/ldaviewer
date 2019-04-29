@@ -22,6 +22,8 @@ create_tt = function(x, vocab, count=200)
     result = "var topicterms = ["
     indsorted = t(apply(x, 1, order, decreasing=TRUE))
     
+    # pretty inefficient but fast enough since nrows is always small
+    # conveniant output format in this sparse format so keeping it like this
     for (i in 1:nrow(indsorted))
     {
         inds = indsorted[i,]

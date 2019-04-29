@@ -1,13 +1,11 @@
-#' Create Small Doc Topics JSON
+#' Create Doc Topics JSON
 #' 
-#' A function to create a string containing the doc topics array.
-#' Takes as input the doc topics array and the names of the files.
-#' If doc topics is incredibly large, then just pass a sample
-#' to this punction and the filenames for that sample.
-#' Output string has this format: var doctopics = [
-#' {'name':'filename1', 'scores':[0.04,...], 'topics':[2,3,41,2...]},
-#' {...}
-#' ]
+#' A function to create a string containing two arrays. First array
+#' has the top topics per doc. Second has the scores for those topics.
+#' If doc topics is incredibly large, then just pass a sample.
+#' Output string has this format: 
+#' var inds = [11,23...];
+#' var scores = [0.04,0.02,...];
 #' @param x A doc topic matrix.
 #' @param fnames A character vector of filenames with length = nrows(x)
 #' @param count **optional** Number of topics per document to store, default=15)
@@ -15,34 +13,24 @@
 #' 
 #' @examples
 #' \dontrun{
-#' dt_small = create_dt(dt, fnames)
+#' dt_small = create_dt(dt) 
 #' dt_small = create_dt(dt, fnames, 20)
 #' }
 #' @export
-create_dt = function(x, fnames, count=15)
+create_dt = function(x, count=15)
 {
-    result = "var doctopics = ["
 
-    dt.list = lapply(seq_len(nrow(x)), function(i) x[i,])
-    indsorted = lapply(dt.list, order, decreasing=TRUE)
+    I = t(apply(x, 1, order, decreasing=TRUE))
+    I = I[,1:count]
+    S = t(apply(x, 1, sort, decreasing=TRUE))
+    S = S[,1:count]
+
+    inds = jsonlite::toJSON(I)
+    scores = jsonlite::toJSON(S)
+
+    str_inds = paste0("var inds=",inds,";\n")
+    str_scores = paste0("var scores=",scores,";")
+    result = paste0(str_inds,str_scores)
     
-    for (i in 1:length(indsorted))
-    {
-        inds = unlist(indsorted[i], use.names=FALSE)
-        scores = (x[i,][inds][1:count])
-        topics = inds[1:count]
-        
-        n = paste0('"',fnames[1],'"')
-        name = paste0("'name':", n)
-        rscores = paste0("'scores':",jsonlite::toJSON(scores))
-        rtopics = paste0("'topics':", jsonlite::toJSON(topics))
-        res = paste0('{', name, ',', rscores, ',', rtopics,'}')
-        if (i < length(indsorted))
-        {
-            res = paste0(res,",\n")
-        }
-        result = paste0(result,res)
-    }
-    result = paste0(result,"];")
     return (result)
 }
