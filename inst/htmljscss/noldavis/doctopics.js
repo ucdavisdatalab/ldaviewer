@@ -4,6 +4,8 @@ function load() {
     create_doc_topics();
     create_topic_terms();
     create_css_doc_topics();
+    d3.selectAll('.bar')
+      .style('fill', "#1f77b4");
     return;
 }
 
@@ -41,6 +43,7 @@ function create_doc_topics () {
     data = data.sort(function (a, b) {
         return d3.ascending(a.value, b.value);
     })
+    document.getElementById("tid").innerHTML =Number(data[14]["name"].split(" ")[1]);
 
     //set up svg using margin conventions - we'll need plenty of room on the left for labels
     var margin = {
@@ -291,6 +294,10 @@ function create_css_doc_topics () {
         var text = tt.join(' ');
         var tdiv = document.getElementById("termstopic" + (i+1).toString());
         var tp = document.createElement("p");
+	var tdivtitle = document.createElement("h3");
+	tdivtitle.innerHTML = "topic id: " + topic;
+	tdivtitle.style.color= "black";
+	tdiv.appendChild(tdivtitle);
         tp.innerHTML = text;
         tp.style.color="black";
         tdiv.classList.add("topic" + (i+1).toString());

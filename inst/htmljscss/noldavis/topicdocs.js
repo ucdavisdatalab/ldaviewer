@@ -27,6 +27,9 @@ function load_docs() {
   // load terms into tterms box
   var terms = t1.join(' ');
   var tdiv = document.getElementById("termstopic");
+  var tdivtitle = document.createElement("h3");
+  tdivtitle.innerHTML = "topic id: " + t_id;
+  tdiv.appendChild(tdivtitle);
   var termstopic = document.createElement("p");
   termstopic.innerHTML = terms;
   tdiv.appendChild(termstopic);
