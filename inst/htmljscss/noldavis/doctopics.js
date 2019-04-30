@@ -1,19 +1,8 @@
 function load() {
-    document.getElementById("doctopics").innerHTML = "";
-    document.getElementById("topicterms").innerHTML = "";
-    create_doc_topics();
-    create_topic_terms();
-    create_css_doc_topics();
-    d3.selectAll('.bar')
-      .style('fill', "#1f77b4");
-    return;
-}
-
-function create_doc_topics () {
-    var documentSearch = document.getElementById("document").value;
+    documentSearch = document.getElementById("document").value;
     if (isNaN(documentSearch)) {
         doc_title = documentSearch;
-        for (var i=0; i <length(fnames);i++){
+        for (var i=0; i <fnames.length;i++){
             if (fnames[i] == doc_title){
                 doc_index = i;
             }
@@ -28,10 +17,26 @@ function create_doc_topics () {
         alert("doc: " + doc_title + "not found");
     }
 
+
+    document.getElementById("doctitle").innerHTML = "";
+    document.getElementById("doctitle").innerHTML = doc_title;
+    document.getElementById("doctopics").innerHTML = "";
+    document.getElementById("topicterms").innerHTML = "";
+
+    create_doc_topics_bar();
+    create_topic_terms_bar();
+    create_css_doc_topics();
+
+    d3.selectAll('.bar')
+      .style('fill', "#1f77b4");
+    return;
+}
+
+function create_doc_topics_bar () {
     document.getElementById("doctopics").innerHTML = "";
 
-    docdata_inds = inds[doc_index];
-    docdata_scores = scores[doc_index];
+    docdata_inds = dt_inds[doc_index];
+    docdata_scores = dt_scores[doc_index];
 
     var data = [];
     for (var i = 0; i < 15; i++) {
@@ -101,7 +106,7 @@ function create_doc_topics () {
                 .style('fill', "#1f77b4")
             elem = d.name.split(" ");
             document.getElementById("tid").innerHTML = elem[1];
-            create_topic_terms();
+            create_topic_terms_bar();
             //console.log("clicked " + elem[1]);
             //document.getElementById("lda-topic").value=elem[1] - 1;
             //document.getElementById("lda-topic-up").click();
@@ -131,17 +136,17 @@ function create_doc_topics () {
         });
 }
 
-function create_topic_terms () {
+function create_topic_terms_bar () {
     t_id = Number(document.getElementById("tid").innerHTML);
     document.getElementById("topic_id").innerHTML = "Topic id: " + t_id;
     document.getElementById("topicterms").innerHTML = "";
 
     var index = t_id - 1;
-    var topicdata = topicterms[index];
-    //console.log(index);
+    var topicinds = tt_inds[index];
+    var topicscores = tt_scores[index];
     var data = [];
     for (var i = 0; i < 15; i++) {
-        var bar = {name:topicdata["terms"][i], value:topicdata["scores"][i].toFixed(4)};
+        var bar = {name:vocab[topicinds[i]], value:topicscores[i].toFixed(4)};
         data.push(bar);
     }
 
@@ -223,28 +228,12 @@ function create_topic_terms () {
         });
 }
 
-function create_css_doc_topics () {
+function create_css_doc_topics() {
+    create_css_topic_terms();
+    create_css_document();
+}
 
-    //---------------------------INIT ---------------------------------//
-    // get the document id from the page
-    var documentSearch = document.getElementById("document").value;
-    if (isNaN(documentSearch)) {
-        doc_title = documentSearch;
-        for (var i=0; i <length(fnames);i++){
-            if (fnames[i] == doc_title){
-                doc_index = i;
-            }
-        }
-
-    } else {
-        doc_index = documentSearch -1;
-        doc_title = fnames[doc_index];
-    }
-
-    if (doc_title == undefined) {
-        alert("doc: " + doc_title + "not found");
-    }
-
+function create_css_topic_terms () {
     // clear the output divs -- topicterms and doctopicsdiv
     document.getElementById("termstopic1").innerHTML = "";
     document.getElementById("termstopic2").innerHTML = "";
@@ -253,7 +242,7 @@ function create_css_doc_topics () {
     document.getElementById("termstopic5").innerHTML = "";
     document.getElementById("cssdoctopics").innerHTML = "";
 
-    // create hash array for the top five topics
+    // create hash array for five topics
     topic_hash_arrays = [];
     t1 = {};
     t2 = {};
@@ -269,10 +258,9 @@ function create_css_doc_topics () {
 
     //---------------------LOAD TOPIC TERMS --------------------------//
     // get the top 5 topics for the given document
-    //console.log("loading in hashes for each topic");
     var ttermsdiv = document.getElementById("topicterms");
-    docdata_inds = inds[doc_index];
-    docdata_scores = scores[doc_index];
+    docdata_inds = dt_inds[doc_index];
+    docdata_scores = dt_scores[doc_index];
 
     // for each topic 1-5
     for (var i = 0; i < 5; i++) {
@@ -281,12 +269,13 @@ function create_css_doc_topics () {
 
         // get top terms for that topic
         var tindex = topic - 1;
-        var topicdata = topicterms[tindex];
+        var topicinds = tt_inds[tindex];
+        var topicscores = tt_scores[tindex];
         var nterms = 50; //300 is max
         var tt = []
         for (var j = 0; j < nterms; j++) {
-            var t = topicdata["terms"][j];
-            var s = Number(topicdata["scores"][j]).toFixed(4);
+            var t = vocab[topicinds[j]]
+            var s = Number(topicscores[j]).toFixed(4);
             topic_hash_arrays[i][t] = s;
             tt.push(t);
         } // for each term in the topic
@@ -303,42 +292,13 @@ function create_css_doc_topics () {
         tdiv.classList.add("topic" + (i+1).toString());
         tdiv.appendChild(tp);
     }//for each top 5 topics fill the hash and add terms to page
+}// create css topic terms
 
-
-    //--------------------AJAX GET DOCUMENT --------------------------//
-    //console.log("ajax request for document");
-    fname = doc_title;
-    ajax_request_load_file(fname, callback);
-
-}
-
-function ajax_request_load_file(fname, callback) {
-    var base ="./data/text/";
-    var http = new XMLHttpRequest();
-
-    http.onreadystatechange = function() {
-        if (http.readyState == 4) {
-            if (http.status = 200) {
-                callback(http.responseText);
-            }
-            else {
-                console.log("failed to load file");
-            }
-        }
-    };
-
-    http.open("GET", base+fname);
-    http.send();
-}
-
-function callback (response)
-{
-    //console.log("parsing doc");
-    var full = response;
-    var words = full.replace(/\n/g," ").split(" ");
-
-    //console.log("for word in doc assigning class if needed");
-    for (var i = 0; i < 350; i++) {
+function create_css_document() {
+   // using document index get the text
+   text = file_contents[doc_index];
+   var words = text.replace(/\n/g," ").split(" ");
+    for (var i = 0; i < Math.min(350, words.length); i++) {
         wd = document.createElement("span");
         wd.innerHTML = words[i] + " ";
 
@@ -371,5 +331,4 @@ function callback (response)
     end.style.textAlign="center";
     end.style.fontSize="xx-large";
     dtd.appendChild(end);
-}
-
+}//css_document
