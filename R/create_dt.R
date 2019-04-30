@@ -14,7 +14,6 @@
 #' @examples
 #' \dontrun{
 #' dt_small = create_dt(dt) 
-#' dt_small = create_dt(dt, fnames, 20)
 #' }
 #' @export
 create_dt = function(x, count=15)
@@ -28,8 +27,8 @@ create_dt = function(x, count=15)
     inds = jsonlite::toJSON(I)
     scores = jsonlite::toJSON(S)
 
-    str_inds = paste0("var inds=",inds,";\n")
-    str_scores = paste0("var scores=",scores,";")
+    str_inds = paste0("var dt_inds=",inds,";\n")
+    str_scores = paste0("var dt_scores=",scores,";")
     result = paste0(str_inds,str_scores)
     
     return (result)

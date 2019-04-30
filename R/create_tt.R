@@ -1,46 +1,33 @@
-#' Create Small Topic Terms JSON
+#' Create Topic Terms JSON
 #' 
 #' A function to create a string containing the topic terms array.
-#' Takes as input the topic terms array and the vocab.
-#' Output string has this format: var topicterms = [
-#' {'name':1, 'scores':[0.04,...], 'terms':['word1", "word2",...]},
-#' {...}
-#' ]
+#' Takes as input the topic terms array.
+#' Output string has this format:
+#' var inds = [21000,131,...];
+#' var scores = [0.003, 0.002,...];
 #' @param x A topic term matrix.
-#' @param fnames A character vector of vocab with length = ncols(x)
 #' @param count **optional** Number of terms per topic to store, default=200)
 #' @return A string containing the JSON.
 #' 
 #' @examples
 #' \dontrun{
-#' tt_small = create_tt(tt, vocab)
-#' tt_small = create_tt(tt, vocab, 100)
+#' tt_small = create_tt(tt)
+#' tt_small = create_tt(tt, 100)
 #' }
 #' @export
 create_tt = function(x, vocab, count=200)
 {
-    result = "var topicterms = ["
-    indsorted = t(apply(x, 1, order, decreasing=TRUE))
+    I = t(apply(x, 1, order, decreasing=TRUE))
+    I = I[,1:count]
+    S = t(apply(x, 1, sort, decreasing=TRUE))
+    S = S[,1:count]
+
+    inds = jsonlite::toJSON(I)
+    scores = jsonlite::toJSON(S)
+
+    str_inds = paste0("var tt_inds=",inds,";\n")
+    str_scores = paste0("var tt_scores=",scores,";")
+    result = paste0(str_inds,str_scores)
     
-    # pretty inefficient but fast enough since nrows is always small
-    # conveniant output format in this sparse format so keeping it like this
-    for (i in 1:nrow(indsorted))
-    {
-        inds = indsorted[i,]
-        scores = (x[i,][inds][1:count])
-        terms = (vocab[inds][1:count])
-        
-        name = paste0("'name':", i)
-        rscores = paste0("'scores':",jsonlite::toJSON(scores))
-        rterms = paste0("'terms':", jsonlite::toJSON(terms))
-        res = paste0('{', name, ',', rscores, ',', rterms,'}')
-        if (i < nrow(indsorted))
-        {
-            res = paste0(res,",\n")
-        }
-        result = paste0(result,res)
-    }
-    result = paste0(result,"];")
     return (result)
 }
-

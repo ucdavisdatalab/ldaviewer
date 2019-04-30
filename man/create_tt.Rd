@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_tt.R
 \name{create_tt}
 \alias{create_tt}
-\title{Create Small Topic Terms JSON}
+\title{Create Topic Terms JSON}
 \usage{
 create_tt(x, vocab, count = 200)
 }
@@ -10,23 +10,20 @@ create_tt(x, vocab, count = 200)
 \item{x}{A topic term matrix.}
 
 \item{count}{**optional** Number of terms per topic to store, default=200)}
-
-\item{fnames}{A character vector of vocab with length = ncols(x)}
 }
 \value{
 A string containing the JSON.
 }
 \description{
 A function to create a string containing the topic terms array.
-Takes as input the topic terms array and the vocab.
-Output string has this format: var topicterms = [
-{'name':1, 'scores':[0.04,...], 'terms':['word1", "word2",...]},
-{...}
-]
+Takes as input the topic terms array.
+Output string has this format:
+var inds = [21000,131,...];
+var scores = [0.003, 0.002,...];
 }
 \examples{
 \dontrun{
-tt_small = create_tt(tt, vocab)
-tt_small = create_tt(tt, vocab, 100)
+tt_small = create_tt(tt)
+tt_small = create_tt(tt, 100)
 }
 }

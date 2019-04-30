@@ -28,17 +28,23 @@
 #' @export
 create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbose=FALSE)
 {
+    fnames = sapply(basename(fnames))
+
     # get data
     if (verbose) {print("creating dt_small")}
     dt_small = create_dt(dt)
     if (verbose) {print("creating td_small")}
-    td_small = create_td(dt, fnames)
+    td_small = create_td(dt)
     if (verbose) {print("creating tt_small")}
-    tt_small = create_tt(tt, vocab)
+    tt_small = create_tt(tt)
 
     # create filenames json
     fnames = jsonlite::toJSON(fnames)
     fnames = paste0("var fnames=", fnames, ";")
+
+    # create vocab json
+    vocab = jsonlite::toJSON(vocab)
+    vocab = paste0("var vocab=",vocab,";")
 
     # make output directory
     if (dir.exists(odir))
@@ -65,12 +71,18 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     con = file(file.path(datadir, "fnames.js"))
     cat(fnames, file=con)
     close.connection(con)
+    con = file(file.path(datadir, "vocab"))
+    cat(vocab, file=con)
+    close.connection(con)
 
 
     # copy texts over
     if (verbose) {print("copying files over")}
-    file.copy(textpath, datadir, recursive=TRUE)
-    file.rename(paste(datadir,textpath,sep="/"), paste0(datadir,"/text/")
+    files = paste0(textpath, fnames)
+    file_contents = create_file_contents(files)
+    con = file(file.path(datadir, "file_contents.js"))
+    cat(file_contents, file=con)
+    close.connection(con)
 
     if (ldavispath == "")
     {
