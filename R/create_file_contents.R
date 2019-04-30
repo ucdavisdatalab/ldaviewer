@@ -12,8 +12,8 @@
 #' 
 #' @examples
 #' \dontrun{
-#' file_contents = create_file_contents("./texts/")
-#' file_contents = create_file_contents("./texts/", 1000)
+#' file_contents = create_file_contents(files)
+#' file_contents = create_file_contents(files, 1000)
 #' }
 #' @export
 create_file_contents = function(files, nchars=3000)

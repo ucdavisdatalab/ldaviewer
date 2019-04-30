@@ -28,7 +28,7 @@
 #' @export
 create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbose=FALSE)
 {
-    fnames = sapply(basename(fnames))
+    filenames = sapply(fnames, basename, USE.NAMES=FALSE)
 
     # get data
     if (verbose) {print("creating dt_small")}
@@ -71,14 +71,14 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     con = file(file.path(datadir, "fnames.js"))
     cat(fnames, file=con)
     close.connection(con)
-    con = file(file.path(datadir, "vocab"))
+    con = file(file.path(datadir, "vocab.js"))
     cat(vocab, file=con)
     close.connection(con)
 
 
-    # copy texts over
-    if (verbose) {print("copying files over")}
-    files = paste0(textpath, fnames)
+    # create file contents json and write to odir
+    if (verbose) {print("writing filecontents to odir")}
+    files = paste0(textpath, filenames)
     file_contents = create_file_contents(files)
     con = file(file.path(datadir, "file_contents.js"))
     cat(file_contents, file=con)

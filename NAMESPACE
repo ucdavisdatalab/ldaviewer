@@ -2,5 +2,6 @@
 
 export(create_dt)
 export(create_file_contents)
+export(create_td)
 export(create_tt)
 export(create_viewer)
