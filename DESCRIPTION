@@ -9,6 +9,7 @@ Authors@R:
 Description: Given the output of a topic model, create several pages to visualize the results. Builds upon ldavis package.
 License: GPL (>= 2)
 Imports: jsonlite
+Suggests: ldavis
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

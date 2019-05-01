@@ -17,20 +17,53 @@
 #' @param odir A string containing the path to create the website in.
 #' @param ldavispath **optional A string containing the path to the lda.json file.
 #'	  if not empty then ldavis will be included in the site.
+#' @param metainfo **optional** A string that you want to place in index.html to record some details
+#'	  about the model.
 #' @param verbose **optional** A bool, displays some extra prints if set to TRUE, default=FALSE.
 #' @return A string that is the path to the directory containing the site
 #'
 #' @examples
 #' \dontrun{
-#' create_viewer(dt,tt,vocab,fnames, "./texts", "./site/", "./jda.json"
-#' create_viewer(dt,tt,vocab,fnames, "./texts", "./site/")
+#' create_viewer(dt,tt,v,f, "./texts", "./site/")
+#' create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json")
+#' create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json", metainfo="alpha=.05 beta=0.1")
+#' create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json", verbose=TRUE)
 #'}
 #' @export
-create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbose=FALSE)
+create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", metainfo="", verbose=FALSE)
 {
-    filenames = sapply(fnames, basename, USE.NAMES=FALSE)
 
-    # get data
+    # ============== CHECK INPUT DATA =============================
+    filenames = sapply(fnames, basename, USE.NAMES=FALSE)
+    files = paste0(textpath, filenames)
+    K = ncol(dt)
+    D = length(files)
+    V = length(vocab)
+
+    if (V != ncol(tt))
+    {
+	warnings("number of unique terms doesn't match number of terms in topic terms matrix")
+    }
+    if (D != nrow(dt))
+    {
+	warnings("number of documents doesn't match number of documents in doc topics matrix")
+    }
+    if (D > 50000)
+    {
+	warning("Number of documents is very high. You probably want to sample dt before running this!")
+    }
+
+
+    # ============== CREATE OUTPUT DIRECTORY ======================
+    if (dir.exists(odir))
+    {
+	unlink(odir, recursive=TRUE)
+    }
+    dir.create(odir)
+    datadir = paste0(odir, "/data/")
+    dir.create(datadir)
+
+    # ============== CREATE JS DATA ===============================
     if (verbose) {print("creating dt_small")}
     dt_small = create_dt(dt)
     if (verbose) {print("creating td_small")}
@@ -39,64 +72,75 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", verbo
     tt_small = create_tt(tt)
 
     # create filenames json
-    fnames = jsonlite::toJSON(fnames)
-    fnames = paste0("var fnames=", fnames, ";")
+    jsfnames = jsonlite::toJSON(fnames)
+    jsfnames = paste0("var fnames=", jsfnames, ";")
 
     # create vocab json
-    vocab = jsonlite::toJSON(vocab)
-    vocab = paste0("var vocab=",vocab,";")
+    jsvocab = jsonlite::toJSON(vocab)
+    jsvocab = paste0("var vocab=",jsvocab,";")
 
-    # make output directory
-    if (dir.exists(odir))
-    {
-	unlink(odir, recursive=TRUE)
-    }
-    dir.create(odir)
+    # create file contents json
+    jsfile_contents = create_file_contents(files)
 
-    datadir = paste0(odir, "/data/")
-    dir.create(datadir)
-
-
+    # =============== WRITE DATA TO OUTPUT/DATA DIRECTORY =========
     if (verbose) {print("writing to odir")}
-    # write to output directory
-    con = file(file.path(datadir, "dt_small.js"))
-    cat(dt_small, file=con)
-    close.connection(con)
-    con = file(file.path(datadir, "td_small.js"))
-    cat(td_small, file=con)
-    close.connection(con)
-    con = file(file.path(datadir, "tt_small.js"))
-    cat(tt_small, file=con)
-    close.connection(con)
-    con = file(file.path(datadir, "fnames.js"))
-    cat(fnames, file=con)
-    close.connection(con)
-    con = file(file.path(datadir, "vocab.js"))
-    cat(vocab, file=con)
-    close.connection(con)
+    cat(dt_small, file = file.path(datadir, "dt_small.js"))
+    cat(td_small, file = file.path(datadir, "td_small.js"))
+    cat(tt_small, file = file.path(datadir, "tt_small.js"))
+    cat(jsfnames, file = file.path(datadir, "fnames.js"))
+    cat(jsvocab, file = file.path(datadir, "vocab.js"))
+    cat(jsfile_contents, file= file.path(datadir, "file_contents.js"))
 
 
-    # create file contents json and write to odir
-    if (verbose) {print("writing filecontents to odir")}
-    files = paste0(textpath, filenames)
-    file_contents = create_file_contents(files)
-    con = file(file.path(datadir, "file_contents.js"))
-    cat(file_contents, file=con)
-    close.connection(con)
 
-    if (ldavispath == "")
+    # =============== COPY SITE FILES TO OUTPUT DIRECTORY =========
+    # copy static files over
+    srcdir = system.file("htmljscss/ldaviewer/", package="ldaviewerDSI")
+    file.copy(list.files(srcdir,full.names=TRUE, recursive=TRUE), odir, recursive=TRUE)
+
+    if (ldavispath != "") 
     {
-	    # copy static files over
-        srcdir = system.file("htmljscss/noldavis/", package="ldaviewerDSI")
-        file.copy(list.files(srcdir,full.names=TRUE, recursive=TRUE), odir, recursive=TRUE)
+        if (verbose) {print("adding ldavis pages")}
+        # copy extra files over (lda.css, ldavis.js, ldavis.html)
+        srcdir = system.file("htmljscss/ldavis/", package="ldaviewerDSI")
+        file.copy(list.files(srcdir, full.names=TRUE, recursive=TRUE), odir)
 
-    } 
+	# copy ldavispath to /data/lda.json
+	file.copy(ldavispath, paste(datadir, "lda.json", sep="/"))
 
-    else 
-    {
-	    # copy static files over with the ldavis
-        srcdir = system.file("htmljscss/withldavis/", package="ldaviewerDSI")
-        file.copy(list.files(srcdir, full.names=TRUE, recursive=TRUE), odir, recursive=TRUE)
+        # modify index.html, doctopics.html, topicdocs.html to have link to ldavis.html
+        # append <a href="ldavis.html">ldavis</a> to <div class="nav">
+	pages = c("index.html", "doctopics.html", "topicdocs.html")
+	fullpages = paste(odir, pages, sep="/")
+	lapply(fullpages,add_nav_link)
     }
+
+
+    # =============== EDIT INDEX.HTML TO HAVE LDA INFO ============
+    # edit the index.html <p id="ldainfo"></p> to have info about the topic model
+    infostring = paste("K =",K,"D =", D,"V =",V, metainfo,sep=" ")
+    ipath = paste(odir,"index.html",sep="/")
+    add_info_string(ipath, infostring)
+
     return (odir)
+}
+
+add_nav_link = function(file)
+{
+    html = xml2::read_html(file)
+    navdiv = xml2::xml_find_first(html, "//div[@class='nav']")
+
+    newdoc = xml2::read_html('<a href="ldavis.html">ldavis</a>')
+    newline = xml2::xml_find_first(newdoc, "//a")
+    xml2::xml_add_child(navdiv, newline)
+    xml2::write_html(html, file)
+}
+
+add_info_string = function(file, infostring)
+{
+    # note only works on index file
+    index = xml2::read_html(file)
+    ldainfo = xml2::xml_find_first(index, "//p[@id='ldainfo']")
+    xml2::xml_text(ldainfo) = infostring
+    xml2::write_html(index, file)
 }
