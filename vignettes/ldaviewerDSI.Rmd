@@ -10,6 +10,7 @@ output: rmarkdown::html_vignette
 knitr::opts_chunk$set(
   collapse = TRUE,
   eval = TRUE,
+  warning = FALSE,
   comment = "#>"
 )
 ```
@@ -54,7 +55,8 @@ inspect(dtm)
 Run the topic model using lda.collapsed.gibbs.sample from the lda package.
 ```{r}
 lda_input = topicmodels::dtm2ldaformat(dtm)
-model = lda::lda.collapsed.gibbs.sampler(documents = lda_input$documents, K=20, vocab=lda_input$vocab, num.iterations=1000, alpha=0.5, eta=0.1, burnin=50)
+vocab = unlist(dtm$dimnames$Terms)
+model = lda::lda.collapsed.gibbs.sampler(documents = lda_input$documents, K=20, vocab=vocab, num.iterations=1000, alpha=0.5, eta=0.1, burnin=50)
 ```
 
 Compute doc topics and topic terms

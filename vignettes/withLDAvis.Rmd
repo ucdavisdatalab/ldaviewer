@@ -10,6 +10,7 @@ output: rmarkdown::html_vignette
 knitr::opts_chunk$set(
   collapse = TRUE,
   eval = TRUE,
+  warning = FALSE,
   comment = "#>"
 )
 ```
@@ -51,7 +52,7 @@ inspect(dtm)
 ```
 
 
-Run the topic model using lda.collapsed.gibbs.sample from the lda package. And compute doc topics and topic terms. lda_input$vocab does not match the vocab in the dtm, not sure why so just using the vocab from the dtm to be safe...
+Run the topic model using lda.collapsed.gibbs.sample from the lda package. And compute doc topics and topic terms. 
 ```{r}
 lda_input = topicmodels::dtm2ldaformat(dtm)
 vocab = unlist(dtm$dimnames$Terms)
