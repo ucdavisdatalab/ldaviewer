@@ -8,9 +8,10 @@ This package generates a website that allows the user to dynamically explore the
 
 Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **quick start** and **reference** pages to see how to use it. When installed it can be loaded in library(ldaviewerDSI).
 
-Alternatively install through github with devtools.
+Alternatively install through bitbucket or github with devtools.
 ```{r}
 devtools::install_github("avkoehl/ldaviewerDSI")
+devtools::install_bitbucket("digitalscholarship/ldaviewerDSI")
 ```
 
 ## Usage
