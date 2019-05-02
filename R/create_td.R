@@ -14,7 +14,6 @@
 #' td_small = create_td(dt) 
 #' td_small = create_td(dt, 20) 
 #' }
-#' @export
 create_td = function(x, count=15)
 {
 

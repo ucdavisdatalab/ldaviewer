@@ -15,7 +15,6 @@
 #' file_contents = create_file_contents(files)
 #' file_contents = create_file_contents(files, 1000)
 #' }
-#' @export
 create_file_contents = function(files, nchars=3000)
 {
     text_list = lapply (files, protected_readChar, nchars)

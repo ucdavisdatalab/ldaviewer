@@ -15,7 +15,6 @@
 #' \dontrun{
 #' dt_small = create_dt(dt) 
 #' }
-#' @export
 create_dt = function(x, count=15)
 {
 

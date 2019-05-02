@@ -14,7 +14,6 @@
 #' tt_small = create_tt(tt)
 #' tt_small = create_tt(tt, 100)
 #' }
-#' @export
 create_tt = function(x, vocab, count=200)
 {
     I = t(apply(x, 1, order, decreasing=TRUE))
