@@ -4,7 +4,7 @@
 \alias{create_viewer}
 \title{Create LDA viewer Site}
 \usage{
-create_viewer(dt, tt, vocab, fnames, textpath, odir, ldavispath = "",
+create_viewer(dt, tt, vocab, fnames, textpath, odir, ldavisJSON = "",
   metainfo = "", verbose = FALSE)
 }
 \arguments{
@@ -21,8 +21,7 @@ all the text files.}
 
 \item{odir}{A string containing the path to create the website in.}
 
-\item{ldavispath}{**optional A string containing the path to the lda.json file.
-if not empty then ldavis will be included in the site.}
+\item{ldavisJSON}{**optional A string containing the json data generated with createJSON from the LDAvispackage.}
 
 \item{metainfo}{**optional** A string that you want to place in index.html to record some details
 about the model.}
@@ -44,8 +43,8 @@ createJSON from ldavis. If so, will add that page to the site.
 \examples{
 \dontrun{
 create_viewer(dt,tt,v,f, "./texts", "./site/")
-create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json")
-create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json", metainfo="alpha=.05 beta=0.1")
-create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json", verbose=TRUE)
+create_viewer(dt,tt,v,f, "./texts", "./site/", ldavisJSON=myjson)
+create_viewer(dt,tt,v,f, "./texts", "./site/", metainfo="alpha=.05 beta=0.1")
+create_viewer(dt,tt,v,f, "./texts", "./site/", verbose=TRUE)
 }
 }

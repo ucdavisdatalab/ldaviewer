@@ -15,8 +15,7 @@
 #' @param textpath A string containing the path to the directory containing
 #'        all the text files.
 #' @param odir A string containing the path to create the website in.
-#' @param ldavispath **optional A string containing the path to the lda.json file.
-#'	  if not empty then ldavis will be included in the site.
+#' @param ldavisJSON **optional A string containing the json data generated with createJSON from the LDAvispackage.
 #' @param metainfo **optional** A string that you want to place in index.html to record some details
 #'	  about the model.
 #' @param verbose **optional** A bool, displays some extra prints if set to TRUE, default=FALSE.
@@ -25,12 +24,12 @@
 #' @examples
 #' \dontrun{
 #' create_viewer(dt,tt,v,f, "./texts", "./site/")
-#' create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json")
-#' create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json", metainfo="alpha=.05 beta=0.1")
-#' create_viewer(dt,tt,v,f, "./texts", "./site/", "./jda.json", verbose=TRUE)
+#' create_viewer(dt,tt,v,f, "./texts", "./site/", ldavisJSON=myjson)
+#' create_viewer(dt,tt,v,f, "./texts", "./site/", metainfo="alpha=.05 beta=0.1")
+#' create_viewer(dt,tt,v,f, "./texts", "./site/", verbose=TRUE)
 #'}
 #' @export
-create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", metainfo="", verbose=FALSE)
+create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavisJSON="", metainfo="", verbose=FALSE)
 {
 
     # ============== CHECK INPUT DATA =============================
@@ -98,7 +97,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", metai
     srcdir = system.file("htmljscss/ldaviewer/", package="ldaviewerDSI")
     file.copy(list.files(srcdir,full.names=TRUE, recursive=TRUE), odir, recursive=TRUE)
 
-    if (ldavispath != "") 
+    if (ldavisJSON != "") 
     {
         if (verbose) {print("adding ldavis pages")}
         # copy extra files over (lda.css, ldavis.js, ldavis.html)
@@ -106,7 +105,7 @@ create_viewer = function(dt,tt,vocab,fnames,textpath, odir, ldavispath="", metai
         file.copy(list.files(srcdir, full.names=TRUE, recursive=TRUE), odir)
 
 	# copy ldavispath to /data/lda.json
-	file.copy(ldavispath, paste(datadir, "lda.json", sep="/"))
+	cat(ldavisJSON, file = file.path(datadir, "lda.json"))
 
         # modify index.html, doctopics.html, topicdocs.html to have link to ldavis.html
         # append <a href="ldavis.html">ldavis</a> to <div class="nav">
