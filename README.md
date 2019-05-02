@@ -4,6 +4,8 @@ This package generates a website that allows the user to dynamically explore the
 
 **ldaviewerDSI** does not run the topic model or create the JSON for **LDAvis**. It is meant to be run on the results of a topic model. To link it with **LDAvis** you need to provide an already created json file with the data required for **LDAvis**. 
 
+View an example at [ds.lib.ucdavis.edu/text-report/ldaviewer/](http://ds.lib.ucdavis.edu:/text-report/ldaviewer/).
+
 ## Installation Instructions
 
 Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **quick start** and **reference** pages to see how to use it. When installed it can be loaded in library(ldaviewerDSI).

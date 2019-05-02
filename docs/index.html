@@ -81,8 +81,15 @@
 <h2 class="hasAnchor">
 <a href="#installation-instructions" class="anchor"></a>Installation Instructions</h2>
 <p>Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the <strong>quick start</strong> and <strong>reference</strong> pages to see how to use it. When installed it can be loaded in library(ldaviewerDSI).</p>
-<p>Alternatively install through github with devtools.</p>
-<pre class="{r}"><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("avkoehl/ldaviewerDSI")</a></code></pre>
+<p>Alternatively install through bitbucket or github with devtools.</p>
+<pre class="{r}"><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("avkoehl/ldaviewerDSI")
+devtools::install_bitbucket("digitalscholarship/ldaviewerDSI")</a></code></pre>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>simply call the create_viewer() function.</p>
+<pre class="{r}"><code><a href="reference/create_viewer.html">create_viewer(dt,tt,v,f, "./texts", "./site/", metainfo="alpha=.05 beta=0.1", verbose=TRUE)</a></code></pre>
 </div>
 <div id="making-modifications-to-this-package" class="section level2">
 <h2 class="hasAnchor">
