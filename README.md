@@ -8,6 +8,11 @@ This package generates a website that allows the user to dynamically explore the
 
 Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **quick start** and **reference** pages to see how to use it. When installed it can be loaded in library(ldaviewerDSI).
 
+Alternatively install through github with devtools.
+```{r}
+devtools::install_github("avkoehl/ldaviewerDSI")
+```
+
 ## Making modifications to this package
 
 This package has a simple work flow: process the data in R, pass that data to the javascript that drives the visualizations. The package structure reflects this. All of the javascript,html, and css is placed in the /inst/ directory. The R code is in the /R/ directory. The main function of this package, **create_viewer()** creates the data necessary for the visuals, and then copies over the webpages (that link to this created data) to the output directory.
