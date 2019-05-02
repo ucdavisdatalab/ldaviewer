@@ -1,0 +1,74 @@
+---
+title: "ldaviewerDSI"
+author: "Arthur Koehl"
+date: "May 1, 2019"
+output: rmarkdown::html_vignette
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = TRUE,
+  comment = "#>"
+)
+```
+
+# Quick Start
+
+This page outlines an example use for the ldaviewerDSI package using a corpus of movie reviews. We will process those reviews from raw text all the way to the final visualization. 
+
+To do so we will need tm, lda, and topic models. 
+
+Load packages
+```{r}
+library(tm) # for dtm
+library(lda) # to run the lda model
+library(topicmodels) # for dtm2ldaformat
+library(ldaviewerDSI) # to create the viewer
+```
+
+
+Read in the documents
+```{r}
+idir = system.file("extdata", "reviews", package="ldaviewerDSI")
+fnames = list.files(idir, pattern="*.txt", full.names=FALSE)
+head(fnames)
+```
+
+Create a document term matrix with the tm package. We will use a sample of 500 of the documents to make this demo run quicker.
+```{r}
+s = sample(1:length(fnames), 500)
+fnames = fnames[s]
+raw = lapply(paste(idir,fnames,sep="/"), readLines)
+corpus = tm::Corpus(tm::VectorSource(raw))
+corpus = tm_map(corpus, tm::removePunctuation) #remove punctuation
+corpus = tm_map(corpus, tm::removeNumbers) #remove numbers
+corpus = tm_map(corpus, tm::removeWords, tm::stopwords("english")) #remove stopwords
+dtm = tm::DocumentTermMatrix(corpus) #create dtm
+dtm = tm::removeSparseTerms(dtm,.995) #remove sparse terms
+inspect(dtm)
+```
+
+
+Run the topic model using lda.collapsed.gibbs.sample from the lda package.
+```{r}
+lda_input = topicmodels::dtm2ldaformat(dtm)
+model = lda::lda.collapsed.gibbs.sampler(documents = lda_input$documents, K=20, vocab=lda_input$vocab, num.iterations=1000, alpha=0.5, eta=0.1, burnin=50)
+```
+
+Compute doc topics and topic terms
+```{r}
+doc_topics = t(apply(model$document_sums + 0.5, 2, function(x) x/sum(x)))
+topic_terms = t(apply(t(model$topics) + 0.1, 2, function(x) x/sum(x)))
+dim(doc_topics)
+dim(topic_terms)
+```
+
+Create the website
+```{r, eval=FALSE}
+create_viewer(doc_topics, topic_terms, lda_input$vocab, fnames, idir, "./site/", verbose=TRUE)
+```
+
+You should now be able to view the website by opening ./site/index.html in a browser.
+If you want to see how to add the LDAvis visualization to the site checkout the "withLDAvis" vignette.
