@@ -13,6 +13,14 @@ Alternatively install through github with devtools.
 devtools::install_github("avkoehl/ldaviewerDSI")
 ```
 
+## Usage
+
+simply call the create_viewer() function.
+
+```{r}
+create_viewer(dt,tt,v,f, "./texts", "./site/", metainfo="alpha=.05 beta=0.1", verbose=TRUE)
+```
+
 ## Making modifications to this package
 
 This package has a simple work flow: process the data in R, pass that data to the javascript that drives the visualizations. The package structure reflects this. All of the javascript,html, and css is placed in the /inst/ directory. The R code is in the /R/ directory. The main function of this package, **create_viewer()** creates the data necessary for the visuals, and then copies over the webpages (that link to this created data) to the output directory.
