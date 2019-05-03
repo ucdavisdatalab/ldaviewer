@@ -146,7 +146,7 @@ function create_topic_terms_bar () {
     var topicscores = tt_scores[index];
     var data = [];
     for (var i = 0; i < 15; i++) {
-        var bar = {name:vocab[topicinds[i]], value:topicscores[i].toFixed(4)};
+        var bar = {name:vocab[topicinds[i]-1], value:topicscores[i].toFixed(4)};
         data.push(bar);
     }
 
@@ -274,7 +274,7 @@ function create_css_topic_terms () {
         var nterms = 50; //300 is max
         var tt = []
         for (var j = 0; j < nterms; j++) {
-            var t = vocab[topicinds[j]]
+            var t = vocab[topicinds[j]-1]
             var s = Number(topicscores[j]).toFixed(4);
             topic_hash_arrays[i][t] = s;
             tt.push(t);

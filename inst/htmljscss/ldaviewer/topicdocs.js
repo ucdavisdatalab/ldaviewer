@@ -15,7 +15,7 @@ function create_topic_terms_box() {
     t1 = []; //global var
     for (var i = 0; i < nterms; i++)
     {
-	var t = vocab[tt_ind[i]];
+	var t = vocab[tt_ind[i]-1];
 	t1.push(t);
     }
     // load terms into tterms box
@@ -36,7 +36,7 @@ function create_documents() {
     docs = [];
     for (var i=0; i < 5; i++)
     {
-	var d = td_ind[i];
+	var d = td_ind[i]-1;
 	docs.push(d);
     }
 
