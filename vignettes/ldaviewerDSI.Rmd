@@ -67,9 +67,19 @@ dim(doc_topics)
 dim(topic_terms)
 ```
 
-Create the website
-```{r, eval=FALSE}
-create_viewer(doc_topics, topic_terms, lda_input$vocab, fnames, idir, "./site/", verbose=TRUE)
+Load in the file contents for the ldaviewer using the load_text function.
+```{r} 
+texts = load_texts(paste(idir,fnames,sep="/"))
+```
+
+Create the data in json format for ldaviewer usin create_viewer_json function.
+```{r}
+json = create_viewer_json(topic_terms, doc_topics, vocab, fnames, texts, verbose=TRUE)
+```
+
+Create the website with the build_website function.
+```{r eval=FALSE}
+build_website(json, "./site", info="K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004")
 ```
 
 You should now be able to view the website by opening ./site/index.html in a browser.

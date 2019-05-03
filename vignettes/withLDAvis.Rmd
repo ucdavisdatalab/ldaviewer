@@ -65,12 +65,22 @@ Run LDAvis createjson().
 ```{r}
 doc_lengths = rowSums(as.matrix(dtm))
 word_freqs = colSums(as.matrix(dtm))
-myjson = createJSON(topic_terms, doc_topics, doc_lengths, lda_input$vocab, word_freqs, reorder.topics=FALSE)
+ldavis = createJSON(topic_terms, doc_topics, doc_lengths, lda_input$vocab, word_freqs, reorder.topics=FALSE)
 ```
 
-Create the website, passing the LDAvis json as a string.
-```{r, eval=FALSE}
-create_viewer(doc_topics, topic_terms, lda_input$vocab, fnames, idir, "./site/", ldavisJSON = myjson, verbose=TRUE)
+Load in the file contents for the ldaviewer using the load_text function.
+```{r} 
+texts = load_texts(paste(idir,fnames,sep="/"))
+```
+
+Create the data in json format for ldaviewer usin create_viewer_json function.
+```{r}
+json = create_viewer_json(topic_terms, doc_topics, vocab, fnames, texts, verbose=TRUE)
+```
+
+Create the website with the build_website function.
+```{r eval=FALSE}
+build_website(json, "./site", ldavis=ldavis info="K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004")
 ```
 
 You should now be able to view the website by opening ./site/index.html in a browser.

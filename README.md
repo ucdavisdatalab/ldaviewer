@@ -18,17 +18,23 @@ devtools::install_bitbucket("digitalscholarship/ldaviewerDSI")
 
 ## Usage
 
-simply call the create_viewer() function.
+Create the data necessary for the site from the results of your topic model.
 
 ```{r}
-create_viewer(dt,tt,v,f, "./texts", "./site/", metainfo="alpha=.05 beta=0.1", verbose=TRUE)
+json = build_website_json(topic_terms, doc_topics, vocab, fnames, texts)
+```
+
+With the data build the website into the output directory specified.
+
+```{r}
+build_website(json, "./outputdir/")
 ```
 
 ## Making modifications to this package
 
-This package has a simple work flow: process the data in R, pass that data to the javascript that drives the visualizations. The package structure reflects this. All of the javascript,html, and css is placed in the /inst/ directory. The R code is in the /R/ directory. The main function of this package, **create_viewer()** creates the data necessary for the visuals, and then copies over the webpages (that link to this created data) to the output directory.
+This package has a simple work flow: process the data in R, pass that data to the javascript that drives the visualizations. The package structure reflects this. All of the javascript,html, and css is placed in the /inst/ directory. The R code is in the /R/ directory. The main function of this package, **build_website()** creates the data necessary for the visuals, and then copies over the webpages (that link to this created data) to the output directory.
 
- If you want to modify this package to change its existing visuals or to add new ones, you need to be aware of this work flow to know where to put your code. If you want to add additional visualizations  you need to add extra javascript and html to /inst/. Then, to have the data necessary for your new visuals, you need to add R code to create a JavaScript friendly representation of that data. Finally, modify the **create_viewer()** to save your data in the output directory, and copy over your new web pages.
+ If you want to modify this package to change its existing visuals or to add new ones, you need to be aware of this work flow to know where to put your code. If you want to add additional visualizations  you need to add extra javascript and html to /inst/. Then, to have the data necessary for your new visuals, you need to add R code to create a JavaScript friendly representation of that data. Finally, modify the **build_website()** to save your data in the output directory, and copy over your new web pages.
 
 ## Contact
 
