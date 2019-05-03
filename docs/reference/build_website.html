@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ldaviewerDSI</title>
+<title>Create LDA viewer Site — build_website • ldaviewerDSI</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,14 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create LDA viewer Site — build_website" />
+
+<meta property="og:description" content="The function that creates the ldaviewer website.
+Reads in the json data from build_website_json and writes
+it to the output directory along with the html/js/css from /inst/.
+Optionally can be passed the lda.json data created by 
+createJSON from ldavis. If so, will add that page to the site." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -104,72 +111,69 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create LDA viewer Site</h1>
+    
+    <div class="hidden name"><code>build_website.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>The function that creates the ldaviewer website.
+Reads in the json data from build_website_json and writes
+it to the output directory along with the html/js/css from /inst/.
+Optionally can be passed the lda.json data created by 
+createJSON from ldavis. If so, will add that page to the site.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="build_website.html">build_website()</a></code> </p>
-        </td>
-        <td><p>Create LDA viewer Site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_dt.html">create_dt()</a></code> </p>
-        </td>
-        <td><p>Create Doc Topics JSON</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_td.html">create_td()</a></code> </p>
-        </td>
-        <td><p>Create Topics Docs JSON</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_tt.html">create_tt()</a></code> </p>
-        </td>
-        <td><p>Create Topic Terms JSON</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_viewer_json.html">create_viewer_json()</a></code> </p>
-        </td>
-        <td><p>Create LDA viewer JSON</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_texts.html">load_texts()</a></code> </p>
-        </td>
-        <td><p>Load Texts</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>build_website</span>(<span class='no'>json</span>, <span class='no'>odir</span>, <span class='kw'>ldavis</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>info</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>odir</th>
+      <td><p>A string containing the path to create the website in.</p></td>
+    </tr>
+    <tr>
+      <th>ldavis</th>
+      <td><p>**optional A string containing the json data generated with createJSON from the LDAvispackage.</p></td>
+    </tr>
+    <tr>
+      <th>info</th>
+      <td><p>**optional** A string that you want to place in index.html to record some details
+about the model.</p></td>
+    </tr>
+    <tr>
+      <th>viewerJSON</th>
+      <td><p>A string containing the json data built with build_website_json</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A string that is the path to the directory containing the site</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>build_website</span>(<span class='no'>viewerjson</span>, <span class='st'>"./site/"</span>)
+<span class='fu'>build_website</span>(<span class='no'>viewerjson</span>, <span class='st'>"./site/"</span>, <span class='kw'>ldavis</span><span class='kw'>=</span><span class='no'>myjson</span>)
+<span class='fu'>build_website</span>(<span class='no'>viewerjson</span>, <span class='st'>"./site/"</span>, <span class='kw'>info</span><span class='kw'>=</span><span class='st'>"alpha=.05 beta=0.1"</span>)
+<span class='co'># }</span></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

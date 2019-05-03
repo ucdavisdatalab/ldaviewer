@@ -89,14 +89,16 @@ devtools::install_bitbucket("digitalscholarship/ldaviewerDSI")</a></code></pre>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>simply call the create_viewer() function.</p>
-<pre class="{r}"><code><a href="reference/create_viewer.html">create_viewer(dt,tt,v,f, "./texts", "./site/", metainfo="alpha=.05 beta=0.1", verbose=TRUE)</a></code></pre>
+<p>Create the data necessary for the site from the results of your topic model.</p>
+<pre class="{r}"><code>json = build_website_json(topic_terms, doc_topics, vocab, fnames, texts)</code></pre>
+<p>With the data build the website into the output directory specified.</p>
+<pre class="{r}"><code><a href="reference/build_website.html">build_website(json, "./outputdir/")</a></code></pre>
 </div>
 <div id="making-modifications-to-this-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#making-modifications-to-this-package" class="anchor"></a>Making modifications to this package</h2>
-<p>This package has a simple work flow: process the data in R, pass that data to the javascript that drives the visualizations. The package structure reflects this. All of the javascript,html, and css is placed in the /inst/ directory. The R code is in the /R/ directory. The main function of this package, <strong>create_viewer()</strong> creates the data necessary for the visuals, and then copies over the webpages (that link to this created data) to the output directory.</p>
-<p>If you want to modify this package to change its existing visuals or to add new ones, you need to be aware of this work flow to know where to put your code. If you want to add additional visualizations you need to add extra javascript and html to /inst/. Then, to have the data necessary for your new visuals, you need to add R code to create a JavaScript friendly representation of that data. Finally, modify the <strong>create_viewer()</strong> to save your data in the output directory, and copy over your new web pages.</p>
+<p>This package has a simple work flow: process the data in R, pass that data to the javascript that drives the visualizations. The package structure reflects this. All of the javascript,html, and css is placed in the /inst/ directory. The R code is in the /R/ directory. The main function of this package, <strong>build_website()</strong> creates the data necessary for the visuals, and then copies over the webpages (that link to this created data) to the output directory.</p>
+<p>If you want to modify this package to change its existing visuals or to add new ones, you need to be aware of this work flow to know where to put your code. If you want to add additional visualizations you need to add extra javascript and html to /inst/. Then, to have the data necessary for your new visuals, you need to add R code to create a JavaScript friendly representation of that data. Finally, modify the <strong>build_website()</strong> to save your data in the output directory, and copy over your new web pages.</p>
 </div>
 <div id="contact" class="section level2">
 <h2 class="hasAnchor">

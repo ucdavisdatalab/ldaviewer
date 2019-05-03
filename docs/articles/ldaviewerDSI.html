@@ -112,24 +112,24 @@
 <a class="sourceLine" id="cb3-8" data-line-number="8">dtm =<span class="st"> </span>tm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/matrix">DocumentTermMatrix</a></span>(corpus) <span class="co">#create dtm</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9">dtm =<span class="st"> </span>tm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/removeSparseTerms">removeSparseTerms</a></span>(dtm,.<span class="dv">995</span>) <span class="co">#remove sparse terms</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/inspect">inspect</a></span>(dtm)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; &lt;&lt;DocumentTermMatrix (documents: 500, terms: 8157)&gt;&gt;</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Non-/sparse entries: 116913/3961587</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; &lt;&lt;DocumentTermMatrix (documents: 500, terms: 8007)&gt;&gt;</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Non-/sparse entries: 114365/3889135</span></a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; Sparsity           : 97%</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; Maximal term length: 17</span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; Weighting          : term frequency (tf)</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; Sample             :</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;      Terms</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Docs  can even film films good just like movie one time</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;   155   6    4   11     7    2    7    5     3   9    4</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;   243   2    3   18     3    0    2    4     3   3    5</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;   264   3    6   24    11    1    6    2     6   8    3</span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;   27    5    3   32     1    6    7    2     1   7    3</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   397   3    4   19     8    3    5    2     2   5    3</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   429   8    2   19     3    3    6    2     3  14    5</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;   431   1    2   23     7    1    3    5     4  15    2</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;   53    1    2   12     2    3    1   10     1   7    0</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;   62    2    5   14     3    3    6    3     4   4    1</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   97   10    2   19     1    3    1    0     1   9    2</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Docs  can even film good just like movie one time will</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;   10    4    4    6    2    6    4    23   4    0    6</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;   121   6    4   11    2    7    5     3   9    4    0</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;   227   3    6   24    1    6    2     6   8    3    5</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;   288   5    3    3    2    6    7     3   6    3    1</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   314   1    1   24    3    2    3     2  11    0    2</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   35    1    1   11    2    6    3     5   7    3    1</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;   420   1    3    5    3    3    5     6   7    6    5</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;   426   2    2   27    3    2    3     1   4    2    5</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;   463   3    3   14    1    5    8     4   5    2    3</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   499   4    3   11    1    7    1     0   6    7    5</span></a></code></pre></div>
 <p>Run the topic model using lda.collapsed.gibbs.sample from the lda package.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">lda_input =<span class="st"> </span>topicmodels<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/topicmodels/topics/ldaformat2dtm">dtm2ldaformat</a></span>(dtm)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">vocab =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unlist">unlist</a></span>(dtm<span class="op">$</span>dimnames<span class="op">$</span>Terms)</a>
@@ -140,9 +140,16 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dim">dim</a></span>(doc_topics)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [1] 500  20</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dim">dim</a></span>(topic_terms)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [1]   20 8157</span></a></code></pre></div>
-<p>Create the website</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/create_viewer.html">create_viewer</a></span>(doc_topics, topic_terms, lda_input<span class="op">$</span>vocab, fnames, idir, <span class="st">"./site/"</span>, <span class="dt">verbose=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [1]   20 8007</span></a></code></pre></div>
+<p>Load in the file contents for the ldaviewer using the load_text function.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">texts =<span class="st"> </span><span class="kw"><a href="../reference/load_texts.html">load_texts</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(idir,fnames,<span class="dt">sep=</span><span class="st">"/"</span>))</a></code></pre></div>
+<p>Create the data in json format for ldaviewer usin create_viewer_json function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">json =<span class="st"> </span><span class="kw"><a href="../reference/create_viewer_json.html">create_viewer_json</a></span>(topic_terms, doc_topics, vocab, fnames, texts, <span class="dt">verbose=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] "creating dt_small"</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1] "creating td_small"</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [1] "creating tt_small"</span></a></code></pre></div>
+<p>Create the website with the build_website function.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/build_website.html">build_website</a></span>(json, <span class="st">"./site"</span>, <span class="dt">info=</span><span class="st">"K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004"</span>)</a></code></pre></div>
 <p>You should now be able to view the website by opening ./site/index.html in a browser. If you want to see how to add the LDAvis visualization to the site checkout the “withLDAvis” vignette.</p>
 </div>
   </div>
