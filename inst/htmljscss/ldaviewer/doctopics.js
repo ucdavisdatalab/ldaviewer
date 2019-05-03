@@ -286,7 +286,11 @@ function create_css_topic_terms () {
 	var tdivtitle = document.createElement("h3");
 	tdivtitle.innerHTML = "topic id: " + topic;
 	tdivtitle.style.color= "black";
+	var tdivscore = document.createElement("h3");
+	tdivscore.innerHTML = "score: " + score;
+	tdivscore.style.color= "black";
 	tdiv.appendChild(tdivtitle);
+	tdiv.appendChild(tdivscore);
         tp.innerHTML = text;
         tp.style.color="black";
         tdiv.classList.add("topic" + (i+1).toString());
