@@ -1,5 +1,5 @@
 ---
-title: "ldaviewerDSI"
+title: "ldaviewer"
 author: "Arthur Koehl"
 date: "May 1, 2019"
 output: rmarkdown::html_vignette
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # Quick Start
 
-This page outlines an example use for the ldaviewerDSI package using a corpus of movie reviews. We will process those reviews from raw text all the way to the final visualization. 
+This page outlines an example use for the ldaviewer package using a corpus of movie reviews. We will process those reviews from raw text all the way to the final visualization. 
 
 To do so we will need tm, lda, and topic models. 
 
@@ -26,13 +26,13 @@ Load packages
 library(tm) # for dtm
 library(lda) # to run the lda model
 library(topicmodels) # for dtm2ldaformat
-library(ldaviewerDSI) # to create the viewer
+library(ldaviewer) # to create the viewer
 ```
 
 
 Read in the documents
 ```{r}
-idir = system.file("extdata", "reviews", package="ldaviewerDSI")
+idir = system.file("extdata", "reviews", package="ldaviewer")
 fnames = list.files(idir, pattern="*.txt", full.names=FALSE)
 head(fnames)
 ```
@@ -72,7 +72,7 @@ Load in the file contents for the ldaviewer using the load_text function.
 texts = load_texts(paste(idir,fnames,sep="/"))
 ```
 
-Create the data in json format for ldaviewer usin create_viewer_json function.
+Create the data in json format for ldaviewer using create_viewer_json function.
 ```{r}
 json = create_viewer_json(topic_terms, doc_topics, vocab, fnames, texts, verbose=TRUE)
 ```

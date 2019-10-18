@@ -1,4 +1,4 @@
-Package: ldaviewerDSI
+Package: ldaviewer
 Title: Creates a website to explore lda outputs.
 Version: 1.0.0
 Authors@R: 

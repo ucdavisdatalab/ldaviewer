@@ -26,13 +26,13 @@ library(tm) # for dtm
 library(lda) # to run the lda model
 library(topicmodels) # for dtm2ldaformat
 library(LDAvis) # to create the viewer
-library(ldaviewerDSI) # to create the viewer
+library(ldaviewer) # to create the viewer
 ```
 
 
 Read in the documents
 ```{r}
-idir = system.file("extdata", "reviews/", package="ldaviewerDSI")
+idir = system.file("extdata", "reviews/", package="ldaviewer")
 fnames = list.files(idir, pattern="*.txt", full.names=FALSE)
 head(fnames)
 ```
@@ -80,7 +80,7 @@ json = create_viewer_json(topic_terms, doc_topics, vocab, fnames, texts, verbose
 
 Create the website with the build_website function.
 ```{r eval=FALSE}
-build_website(json, "./site", ldavis=ldavis info="K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004")
+build_website(json, "./site", ldavis=ldavis, info="K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004")
 ```
 
 You should now be able to view the website by opening ./site/index.html in a browser.

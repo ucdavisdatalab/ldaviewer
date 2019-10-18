@@ -12,8 +12,7 @@ Clone the bitbucket repository. Through the command line run R CMD build and R C
 
 Alternatively install through bitbucket or github with devtools.
 ```{r}
-devtools::install_github("avkoehl/ldaviewerDSI")
-devtools::install_bitbucket("digitalscholarship/ldaviewerDSI")
+devtools::install_github("ucdavisdatalab/ldaviewer")
 ```
 
 ## Usage
