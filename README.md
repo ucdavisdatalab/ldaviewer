@@ -1,8 +1,8 @@
-# Lda Viewer DSI
+# Lda Viewer
 
 This package generates a website that allows the user to dynamically explore the results of a topic model. It takes as basic input the document topics matrix and topic terms matrix. The view provides a way to measure how well the model fit the documents in the corpus. In addition, it can easily be combined with the **LDAvis** package. 
 
-**ldaviewerDSI** does not run the topic model or create the JSON for **LDAvis**. It is meant to be run on the results of a topic model. To link it with **LDAvis** you need to provide an already created json file with the data required for **LDAvis**. 
+**ldaviewer** does not run the topic model or create the JSON for **LDAvis**. It is meant to be run on the results of a topic model. To link it with **LDAvis** you need to provide an already created json file with the data required for **LDAvis**. 
 
 View an example at [ds.lib.ucdavis.edu/text-report/ldaviewer/](http://ds.lib.ucdavis.edu:/text-report/ldaviewer/).
 
