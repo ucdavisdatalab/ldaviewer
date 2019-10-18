@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Creates a website to explore lda outputs. • ldaviewerDSI</title>
+<title>Creates a website to explore lda outputs. • ldaviewer</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">ldaviewerDSI</a>
+        <a class="navbar-link" href="index.html">ldaviewer</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
@@ -43,7 +43,7 @@
   </a>
 </li>
 <li>
-  <a href="articles/ldaviewerDSI.html">Get started</a>
+  <a href="articles/ldaviewer.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -72,19 +72,18 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="lda-viewer-dsi" class="section level1">
+<div id="lda-viewer" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#lda-viewer-dsi" class="anchor"></a>Lda Viewer DSI</h1></div>
+<a href="#lda-viewer" class="anchor"></a>Lda Viewer</h1></div>
 <p>This package generates a website that allows the user to dynamically explore the results of a topic model. It takes as basic input the document topics matrix and topic terms matrix. The view provides a way to measure how well the model fit the documents in the corpus. In addition, it can easily be combined with the <strong>LDAvis</strong> package.</p>
-<p><strong>ldaviewerDSI</strong> does not run the topic model or create the JSON for <strong>LDAvis</strong>. It is meant to be run on the results of a topic model. To link it with <strong>LDAvis</strong> you need to provide an already created json file with the data required for <strong>LDAvis</strong>.</p>
+<p><strong>ldaviewer</strong> does not run the topic model or create the JSON for <strong>LDAvis</strong>. It is meant to be run on the results of a topic model. To link it with <strong>LDAvis</strong> you need to provide an already created json file with the data required for <strong>LDAvis</strong>.</p>
 <p>View an example at <a href="http://ds.lib.ucdavis.edu:/text-report/ldaviewer/">ds.lib.ucdavis.edu/text-report/ldaviewer/</a>.</p>
 <div id="installation-instructions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-instructions" class="anchor"></a>Installation Instructions</h2>
-<p>Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the <strong>quick start</strong> and <strong>reference</strong> pages to see how to use it. When installed it can be loaded in library(ldaviewerDSI).</p>
-<p>Alternatively install through bitbucket or github with devtools.</p>
-<pre class="{r}"><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("avkoehl/ldaviewerDSI")
-devtools::install_bitbucket("digitalscholarship/ldaviewerDSI")</a></code></pre>
+<p>Clone the github repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the <strong>quick start</strong> and <strong>reference</strong> pages to see how to use it. When installed it can be loaded in library(ldaviewer).</p>
+<p>Alternatively install through github with devtools.</p>
+<pre class="{r}"><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("ucdavisdatalab/ldaviewer")</a></code></pre>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">

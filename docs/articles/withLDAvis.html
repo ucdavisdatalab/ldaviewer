@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>withLDAvis • ldaviewerDSI</title>
+<title>withLDAvis • ldaviewer</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ldaviewerDSI</a>
+        <a class="navbar-link" href="../index.html">ldaviewer</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
@@ -43,7 +43,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/ldaviewerDSI.html">Get started</a>
+  <a href="../articles/ldaviewer.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -95,9 +95,9 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lda) <span class="co"># to run the lda model</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(topicmodels) <span class="co"># for dtm2ldaformat</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(LDAvis) <span class="co"># to create the viewer</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ldaviewerDSI) <span class="co"># to create the viewer</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ldaviewer) <span class="co"># to create the viewer</span></a></code></pre></div>
 <p>Read in the documents</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">idir =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"reviews/"</span>, <span class="dt">package=</span><span class="st">"ldaviewerDSI"</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">idir =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"reviews/"</span>, <span class="dt">package=</span><span class="st">"ldaviewer"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">fnames =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(idir, <span class="dt">pattern=</span><span class="st">"*.txt"</span>, <span class="dt">full.names=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fnames)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; [1] "1.txt"    "10.txt"   "100.txt"  "1000.txt" "1001.txt" "1002.txt"</span></a></code></pre></div>
@@ -112,24 +112,24 @@
 <a class="sourceLine" id="cb3-8" data-line-number="8">dtm =<span class="st"> </span>tm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/matrix">DocumentTermMatrix</a></span>(corpus) <span class="co">#create dtm</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9">dtm =<span class="st"> </span>tm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/removeSparseTerms">removeSparseTerms</a></span>(dtm,.<span class="dv">995</span>) <span class="co">#remove sparse terms</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/inspect">inspect</a></span>(dtm)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; &lt;&lt;DocumentTermMatrix (documents: 500, terms: 8045)&gt;&gt;</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Non-/sparse entries: 116228/3906272</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; &lt;&lt;DocumentTermMatrix (documents: 500, terms: 8094)&gt;&gt;</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; Non-/sparse entries: 117209/3929791</span></a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; Sparsity           : 97%</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; Maximal term length: 17</span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; Weighting          : term frequency (tf)</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; Sample             :</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;      Terms</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Docs  can even film good just like movie one time will</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;   2     4    4    6    2    6    4    23   4    0    6</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;   201   8    6   25    5    5    5     2  16    5    7</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;   249   3    0   23    3    2    2     2   5    2    1</span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;   307   1    2   23    1    3    5     4  15    2    2</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   331   1    6    7    3    1    5    10   5    7    0</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   35    3    4   19    3    6    7     1  13    1    3</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;   350   3    6   16    1    5    3     7  11    5    1</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;   389   3    6   39    4    8    3     5   7   10    4</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;   402   6    4   11    2    7    5     3   9    4    0</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   425   1    2    9    1    1    1     1   5    1    0</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Docs  also can even film good just like movie one story</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;   104   13   3    6   39    4    8    3     5   7     2</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;   151    7   3    6   16    1    5    3     7  11     0</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;   169    0  10    2   19    3    1    0     1   9     0</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;   197    0   1    2   18    0    4    6     2   6     4</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   276    3   4    3   23    0    6    5     1   8     0</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   277    6   1    2   18    1    0    1     0   8     3</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;   354    5   3    4   19    3    5    2     2   5     1</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;   383    6   6    4   11    2    7    5     3   9     1</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;   432    0   3    2    1    3    1    3    23   9     3</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   88     9   3    6   24    1    6    2     6   8    13</span></a></code></pre></div>
 <p>Run the topic model using lda.collapsed.gibbs.sample from the lda package. And compute doc topics and topic terms.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">lda_input =<span class="st"> </span>topicmodels<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/topicmodels/topics/ldaformat2dtm">dtm2ldaformat</a></span>(dtm)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">vocab =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unlist">unlist</a></span>(dtm<span class="op">$</span>dimnames<span class="op">$</span>Terms)</a>
@@ -148,7 +148,7 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1] "creating td_small"</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [1] "creating tt_small"</span></a></code></pre></div>
 <p>Create the website with the build_website function.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/build_website.html">build_website</a></span>(json, <span class="st">"./site"</span>, <span class="dt">ldavis=</span>ldavis <span class="dt">info=</span><span class="st">"K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/build_website.html">build_website</a></span>(json, <span class="st">"./site"</span>, <span class="dt">ldavis=</span>ldavis, <span class="dt">info=</span><span class="st">"K=20 alpha=0.5 eta=0.1 burning=50 D=500 V=8004"</span>)</a></code></pre></div>
 <p>You should now be able to view the website by opening ./site/index.html in a browser.</p>
 </div>
   </div>

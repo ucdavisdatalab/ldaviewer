@@ -8,9 +8,9 @@ View an example at [ds.lib.ucdavis.edu/text-report/ldaviewer/](http://ds.lib.ucd
 
 ## Installation Instructions
 
-Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **quick start** and **reference** pages to see how to use it. When installed it can be loaded in library(ldaviewerDSI).
+Clone the github repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **quick start** and **reference** pages to see how to use it. When installed it can be loaded in library(ldaviewer).
 
-Alternatively install through bitbucket or github with devtools.
+Alternatively install through github with devtools.
 ```{r}
 devtools::install_github("ucdavisdatalab/ldaviewer")
 ```
